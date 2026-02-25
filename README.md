@@ -30,7 +30,7 @@ flowchart TB
     Host --> Caddy["Caddy :8080"]
     Host --> Samba["Samba (/srv/storage)"]
     Host --> RAID["15TB RAID Array (/srv/storage)"]
-
+```
 <img width="2576" height="2184" alt="chrome_Z8yt4ydHDs" src="https://github.com/user-attachments/assets/c84a9b90-6451-4a82-9fa1-b1f079f0c202" />
 
 # 🧠 Core Systems
@@ -39,8 +39,8 @@ flowchart TB
 
 Container runtime for all application services.
 
-```docker ps
-systemctl status docker```
+`docker ps`
+`systemctl status docker`
 
 ## 🎬 Emby (Media Server)
 
@@ -125,9 +125,9 @@ rsync-based nightly backups
 Docker volume snapshotting
 
 ## 🚨 Post-Reboot Checklist
-```uname -r
-df -h | grep storage
-docker ps```
+`uname -r`
+`df -h | grep storage`
+`docker ps`
 
 If all pass → vessel stable.
 
