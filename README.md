@@ -1,285 +1,172 @@
-# LilBestie-Server-Manual
-Lil Bestie is my personal homelab server. She contains multitudes, this is her manual. 
-Lil Bestie begain life as a Windows 10 home server, until an unfortunate encounter with a hacker left her hobbled. 
+# 🚀 Lil Bestie Server Manual  
+### USS Lil Bestie – Commissioned Infrastructure Platform
 
-As the dedicated systems engineer, I confidently told the cats, "Ladies, we can rebuild her." 
+> Hostname: `multiplexer`  
+> OS: Debian 13 (Trixie)  
+> Role: Media • Web • File • Container Host  
+> Status: Operational  
 
-🚀 USS Lil Bestie
-=================
+---
+
+# 🖥 Overview
+
+Lil Bestie began life as a Windows 10 machine that could no longer receive updates due to hardware limitations.  
+
+It has since been rebuilt from bare metal into a stable Debian-based infrastructure platform running Dockerized services, network file sharing, a dashboard control plane, and automated backup strategy.
+
+---
+
+# 🛰 Architecture
+
+```mermaid
+flowchart TB
+    Internet --> Router["Router (DHCP Reservation)"]
+    Router --> Host["multiplexer (Debian 13)"]
+
+    Host --> Emby["Emby :8096"]
+    Host --> Portainer["Portainer :9443"]
+    Host --> Homarr["Homarr :7575"]
+    Host --> Dashdot["Dashdot :3002"]
+    Host --> Caddy["Caddy :8080"]
+    Host --> Samba["Samba (/srv/storage)"]
+    Host --> RAID["15TB RAID Array (/srv/storage)"]
+
 <img width="2576" height="2184" alt="chrome_Z8yt4ydHDs" src="https://github.com/user-attachments/assets/c84a9b90-6451-4a82-9fa1-b1f079f0c202" />
 
-Captain’s Log – Commissioning Record
-------------------------------------
+# 🧠 Core Systems
 
-*  **Vessel Name:** Lil Bestie
+## 🐳 Docker
 
-*  **Call Sign:** multiplexer
+Container runtime for all application services.
 
-*  **IP Address:** 192.168.1.157
+```docker ps
+systemctl status docker```
 
-*  **OS:** Debian 13 (Trixie)
+## 🎬 Emby (Media Server)
 
-*  **Primary Engineer:** Michelle
+Port: 8096
 
-*  **Original State:** Windows 10, dead in the water
+Media Root: /srv/storage/media
 
-Architecture Diagram
---------------------
-Internet
+Status: Operational
 
-   |
-   
-Router (DHCP reservation)
+## 🛠 Portainer (Container Management)
 
-   |
-   
-multiplexer (Debian 13)
+Port: 9443
 
-   ├── Emby (8096)
-   
-   ├── Portainer (9443)
-   
-   ├── Homarr (7575)
-   
-   ├── Dashdot (3002)
-   
-   ├── Caddy (8080)
-   
-   └── Samba (/srv/storage)
+SSL enabled
 
-Stardate: The Week™
--------------------
+Used for container lifecycle management
 
-Initial assessment revealed:
+## 🖥 Homarr (Dashboard)
 
-*   Windows 10 incapable of updating
-    
-*   Hardware deemed “unsupported”
-    
-*   Ransomware damage previously sustained
-    
-*   RAID configuration unknown
-    
-*   Boot instability
-    
-*   Kernel drama
-    
-*   Network instability
-    
-*   Emotional instability (briefly)
-    
+Port: 7575
 
-Decision made to scuttle legacy system and rebuild from bare metal.
+Centralized service control interface
 
-Phase I – Resurrection
-----------------------
+Contains Captain’s Log and telemetry
 
-*   RAID 6 confirmed on LSI MegaRAID 9271-8i
-    
-*   Debian installed on NVMe
-    
-*   XFS RAID mounted at /srv/storage
-    
-*   Kernel regressions identified and defeated
-    
-*   Stable kernel achieved: 6.12.73+deb13-amd64
-    
-*   Boot restored
-    
-*   systemd appeased
-    
+## 📊 Dashdot (System Telemetry)
 
-The vessel breathed again.
+Port: 3002
 
-Phase II – Infrastructure Online
---------------------------------
+Host metrics mounted read-only
 
-The following systems are operational:
+Real-time CPU, memory, disk, network
 
-### 🐳 Container Subsystem (Docker)
+## 🌐 Caddy (Web Server)
 
-*   Status verified via docker ps
-    
-*   Persistent restart policies enabled
-    
+Port: 8080
 
-### 🎬 Emby Media Service
+Hosts personal site
 
-*   Streaming operational
-    
-*   Media mounted from /srv/storage/media
-    
+Static content served from /srv/storage/www
 
-### 🛠 Portainer Control Console
+## 📂 Samba (File Sharing)
 
-*   Administrative access secured
-    
-*   HTTPS functional
-    
+Network Share: \\192.168.x.x\Media
 
-### 🌐 Web Hosting (Caddy)
+Mounted locally at /srv/storage/media
 
-*   Personal site deployed
-    
-*   Inside jokes embedded
-    
-*   Romantic infrastructure confirmed
-    
+Windows Z: drive mapping configured
 
-### 📂 Samba File Transport
+## 💾 Storage Layout
 
-*   \\\\192.168.1.157\\Media
-    
-*   Mapped as Drive Z:
-    
-*   Basement USB exile officially ended
-    
+NVMe SSD: Operating System
 
-### 🖥 Homarr Command Dashboard
+15TB RAID: Primary Data (/srv/storage)
 
-*   Centralized control interface operational
-    
-*   Widgets online
-    
-*   Empire view achieved
-    
+8TB HDD: Backup Target (offline strategy in progress)
 
-Phase III – Stabilization
--------------------------
+Mount validation:
 
-*   DHCP reservation configured
-    
-*   Network route verified
-    
-*   /srv/storage mount hardened with:
-    
-    *   nofail
-        
-    *   x-systemd.automount
-        
-*   Reboot survivability confirmed
-    
-*   Post-reboot validation checklist established
-    
+`df -h | grep storage`
 
-The vessel now boots reliably without ritual sacrifice.
+##🔁 Backup Strategy
 
-Phase IV – Data Preservation Protocol
--------------------------------------
+Critical assets:
 
-Critical assets identified:
+Photos
 
-*   Photos
-    
-*   Recipes
-    
-*   Minecraft worlds
-    
-*   Website content
-    
+Recipes
 
-Backup strategy in progress:
+Minecraft Worlds
 
-*   Primary: RAID array
-    
-*   Secondary: 8TB backup disk
-    
-*   Automation via cron + rsync
-    
-*   Volume snapshotting for Docker
-    
+Website content
 
-Ransomware shall not pass again.
+Strategy:
 
-Current Operational Checklist
------------------------------
+Primary: RAID
 
-After reboot, confirm:
+Secondary: 8TB backup disk
 
-`   uname -r  df -h | grep storage  docker ps   `
+rsync-based nightly backups
 
-If all systems green → vessel stable.
+Docker volume snapshotting
 
-Known Victories
----------------
+## 🚨 Post-Reboot Checklist
+```uname -r
+df -h | grep storage
+docker ps```
 
-*   Kernel regression defeated
-    
-*   Mount failure corrected
-    
-*   Network cable reseated (twice)
-    
-*   Docker revived
-    
-*   Port confusion resolved
-    
-*   Samba typo conquered
-    
-*   Homarr image source corrected
-    
-*   WD40 joke deployed successfully
-    
+If all pass → vessel stable.
 
-Crew Notes
-----------
+## 🛠 Lessons Learned
 
-Primary Engineer reports increased affection for:
+Kernel regressions happen.
 
-*   Command line interfaces
-    
-*   Text-based configuration
-    
-*   Immutable infrastructure
-    
-*   Norse-named dashboards
-    
+systemd mount options matter.
 
-Morale currently high.
+A single misplaced dash can cost hours.
 
-Prince has been played.
+DHCP reservations prevent existential dread.
 
-Cookies have been consumed.
+Monitoring dashboards can lie.
 
-Future Mission Objectives
--------------------------
+Documentation reduces future chaos.
 
-*   Automated backup verification
-    
-*   Minecraft server deployment
-    
-*   Reverse proxy refinement
-    
-*   Health telemetry page
-    
-*   Git-tracked infrastructure
-    
-*   Optional: next-level chaos engineering
-    
-Lessons Learned
----------------
-*  Linux > Windows for a zombie machine with vintage hardware, but life left in her
-  
-*  Persistence pays off
-  
-*  Always code with cats and/or cookies
-  
-*  Nothing says "I love you" like a server
-  
-*  A sense of humor is the most valuable tool in an engineer's toolbox
+Cookies improve uptime.
 
-What I'd Do Differently
------------------------
-*  Give up on Windows faster
-  
-*  Containerized critical services sooner
-  
-*  Created a better backup before all this happened. 
+## 🏁 Commissioning Statement
 
-Commissioning Statement
------------------------
+Lil Bestie has been successfully converted from a defunct Windows 10 machine into a stable Debian-based infrastructure host supporting:
 
-USS Lil Bestie has been fully recommissioned from defunct Windows relic to stable Debian infrastructure platform.
+Media streaming
 
-All core systems functional.All services operational.All romance containerized.
+Container orchestration
 
-Signed,**Captain Michelle**Automation EngineerBreaker of KernelsMapper of Z Drives
+Network file sharing
+
+Personal web hosting
+
+Real-time telemetry
+
+Dashboard control plane
+
+Structured backup strategy
+
+Deployed and stabilized by Michelle.
+
+Breaker of Kernels.
+Mapper of Z Drives.
+All romance containerized.
