@@ -1,4 +1,9 @@
-# 🚀 Lil Bestie Server Manual  
+![Stable](https://img.shields.io/badge/status-stable-brightgreen)
+![Docker](https://img.shields.io/badge/docker-enabled-blue)
+![Debian](https://img.shields.io/badge/os-debian%2013-red)
+
+# 🚀 Lil Bestie Server Manual
+
 ### USS Lil Bestie – Commissioned Infrastructure Platform
 
 > Hostname: `multiplexer`  
