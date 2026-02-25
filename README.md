@@ -102,7 +102,7 @@ Mount validation:
 
 `df -h | grep storage`
 
-##🔁 Backup Strategy
+## 🔁 Backup Strategy
 
 Critical assets:
 
