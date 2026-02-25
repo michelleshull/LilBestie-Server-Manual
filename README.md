@@ -11,25 +11,40 @@ As the dedicated systems engineer, I confidently told the cats, "Ladies, we can 
 Captain’s Log – Commissioning Record
 ------------------------------------
 
-**Vessel Name:** Lil Bestie
-**Call Sign:** multiplexer
-**IP Address:** 192.168.1.157
-**OS:** Debian 13 (Trixie)
-**Primary Engineer:** Michelle
-**Original State:** Windows 10, dead in the water
+*  **Vessel Name:** Lil Bestie
+
+*  **Call Sign:** multiplexer
+
+*  **IP Address:** 192.168.1.157
+
+*  **OS:** Debian 13 (Trixie)
+
+*  **Primary Engineer:** Michelle
+
+*  **Original State:** Windows 10, dead in the water
 
 Architecture Diagram
 --------------------
 Internet
+
    |
+   
 Router (DHCP reservation)
+
    |
+   
 multiplexer (Debian 13)
+
    ├── Emby (8096)
+   
    ├── Portainer (9443)
+   
    ├── Homarr (7575)
+   
    ├── Dashdot (3002)
+   
    ├── Caddy (8080)
+   
    └── Samba (/srv/storage)
 
 Stardate: The Week™
