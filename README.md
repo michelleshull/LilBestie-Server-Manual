@@ -8,6 +8,17 @@
 
 ---
 
+## 📚 Table of Contents
+
+- [Overview](#overview)
+- [Architecture](#-architecture)
+- [Core Systems](#-core-systems)
+- [Storage Layout](#-storage-layout)
+- [Backup Strategy](#-backup-strategy)
+- [Post-Reboot Checklist](#-post-reboot-checklist)
+- [Lessons Learned](#-lessons-learned)
+- [Commissioning Statement](#-commissioning-statement)
+ 
 # 🖥 Overview
 
 Lil Bestie began life as a Windows 10 machine that could no longer receive updates due to hardware limitations.  
@@ -125,6 +136,7 @@ rsync-based nightly backups
 Docker volume snapshotting
 
 ## 🚨 Post-Reboot Checklist
+
 `uname -r`
 `df -h | grep storage`
 `docker ps`
